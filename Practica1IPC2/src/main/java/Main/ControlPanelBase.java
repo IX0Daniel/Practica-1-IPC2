@@ -97,7 +97,7 @@ public class ControlPanelBase {
                 controlJugador = new ControlUsuarioJugador(panelJugador);
                 
                 layoutPanel.show(panelBase, "player");
-                panelJugador.agregarEventoregresarMenu(e -> mostrarPanelLogin(panelJugador));
+                panelJugador.agregarEventoRergresarMenu(e -> mostrarPanelLogin(panelJugador));
                 
                 break;
         }

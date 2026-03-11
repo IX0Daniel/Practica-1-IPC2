@@ -26,6 +26,7 @@
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Partida/PanelBaseJugador.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Partida/PanelMenuJugador.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Partida/PanelPedidoAceptado.java
+/home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Partida/PanelResultados.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Partida/SubPanelIngredientes.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Partida/ValidarIngrediente.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Pedidos/Productos.java
@@ -36,6 +37,7 @@
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Sistema/ControlUsuarioJugador.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Sistema/Controlador.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Sistema/CrearPedido.java
+/home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Sistema/DatosPartida.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Sistema/Pedido.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Sistema/Temporizador.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Usuarios/Ingrediente.java

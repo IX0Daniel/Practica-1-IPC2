@@ -15,7 +15,7 @@ public class ControlUsuarioJugador {
     }
     
     public void eventoBotonJugarPartida(ActionListener evento){
-        panelBaseJugador.agregarEventoregresarMenu(evento);
+        panelBaseJugador.agregarEventoRergresarMenu(evento);
     }
     
 }

@@ -6,9 +6,11 @@ import BaseDatos.PedidoDB;
 import BaseDatos.UsuarioDB;
 import Paneles.PanelPartida;
 import Partida.InformacionPedido;
+import Partida.PanelBaseJugador;
 import Partida.PanelPedidoAceptado;
 import Usuarios.Sucursal;
 import Usuarios.Usuario;
+import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -21,16 +23,24 @@ public class ControlPartida implements Controlador{
     private Usuario player;
     private Sucursal sucursal;
     private int tiempoTranscurrido;
+    private PanelBaseJugador panelBase;
+    
+    
+    private Runnable terminarTurno;
+    private boolean turnoActivo;
+    private DatosPartida datosPartida;
     
     private Controlador controlPedidos;
     
-    public ControlPartida(PanelPartida panelPartida, Usuario player){
+    public ControlPartida(PanelPartida panelPartida, Usuario player, Runnable terminarTurno){
         this.player = player;
+        this.terminarTurno = terminarTurno;
         this.panelPartida = panelPartida;
         creadorPedido = new CrearPedido();
         
         //controlPedidos = new ControlPedidos(panelPartida.getPanelPedidos());        
         
+        datosPartida = new DatosPartida(player);
         
 
         tiempoTurno();
@@ -50,7 +60,11 @@ public class ControlPartida implements Controlador{
     
     }
     
+    
+    
     /*
+        METODO PARA PEDIDOS ACEPTADOS
+        
         DESDE AQUÍ SE DEBE ENVIAR EL MÉTODO AL CONTROL PEDIDOS PARA QUE AL PRESIONAR
         "ENTREGAR" SE LE INFORME AL "panelPartida" QUE ELIMINE EL PANEL jajalasfdlkadakjl
     */
@@ -71,6 +85,8 @@ public class ControlPartida implements Controlador{
         new InventarioDB().actualizarInventario(player.getSucursal().getId(), pedido.getIngredientes());
         panelAceptado.setEventoEntrega(e -> eliminarPanelPedidoAceptado(panelAceptado, controlPanelAceptado, pedido));
         
+        datosPartida.getPedidos().agregarElemento(pedido);
+        
     }
     
     private void eliminarPanelPedidoAceptado(PanelPedidoAceptado panelAceptado, ControlPedidos controlPanelAceptado, Pedido pedido){
@@ -87,6 +103,8 @@ public class ControlPartida implements Controlador{
             RECHAZADO
             
         */
+        
+        //LA BASE DE DATOS SE ACTUALIZA HASTA EN ESTE PUNTO
         
         new PedidoDB().actualizarEstadoPedido(pedido.getIdPedido(), pedido.getEstado());
         panelPartida.eliminarPanelPedidoAceptado(panelAceptado);
@@ -121,7 +139,19 @@ public class ControlPartida implements Controlador{
             if(tiempoTranscurrido >= 1){
                 tiempoTranscurrido--;
                 panelPartida.mostrarTiempo(tiempoTranscurrido);
+            }else{
+                ((Timer) ae.getSource()).stop();
+                
+                //INDICAR AL PANEL BASE JUGADOR QUE CAMBIE AL PANEL RESULTADOS :vvvV:v:v:v:v
+                terminarTurno.run();
             }
+            
+            
+            //if(turnoActivo)
+            
+            
+            
+            
         });
         
         tiempo.start();
@@ -136,4 +166,11 @@ public class ControlPartida implements Controlador{
     
     
     }
+
+    public DatosPartida getDatosPartida() {
+        return datosPartida;
+    }
+    
+    
+    
 }

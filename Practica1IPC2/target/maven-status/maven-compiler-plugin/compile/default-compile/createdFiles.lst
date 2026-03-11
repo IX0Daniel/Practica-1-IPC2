@@ -11,6 +11,7 @@ Sistema/ControlPartida.class
 Paneles/PanelBase.class
 Usuarios/Ingrediente.class
 Listas/ListaObjetos.class
+Partida/PanelResultados.class
 Pedidos/Productos.class
 Usuarios/Sucursal.class
 Partida/ValidarIngrediente.class
@@ -27,6 +28,7 @@ BaseDatos/CrearUsuario.class
 Sistema/CrearPedido.class
 BaseDatos/IngredienteBD.class
 Usuarios/ObjetoBaseDato.class
+Sistema/DatosPartida.class
 Partida/PanelPedidoAceptado.class
 Sistema/Temporizador.class
 PanelPartida/PanelPedidos.class

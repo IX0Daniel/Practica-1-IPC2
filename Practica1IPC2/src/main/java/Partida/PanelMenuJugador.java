@@ -43,7 +43,8 @@ public class PanelMenuJugador extends javax.swing.JPanel {
         labelNombre = new javax.swing.JLabel();
         labelSucursal = new javax.swing.JLabel();
         botonPartida = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scrollHistorial = new javax.swing.JScrollPane();
+        panelHistorial = new javax.swing.JPanel();
         labelID = new javax.swing.JLabel();
         botonMenu = new javax.swing.JButton();
 
@@ -70,6 +71,21 @@ public class PanelMenuJugador extends javax.swing.JPanel {
         botonPartida.setForeground(new java.awt.Color(0, 0, 0));
         botonPartida.setText("Iniciar Partida");
 
+        scrollHistorial.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        javax.swing.GroupLayout panelHistorialLayout = new javax.swing.GroupLayout(panelHistorial);
+        panelHistorial.setLayout(panelHistorialLayout);
+        panelHistorialLayout.setHorizontalGroup(
+            panelHistorialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 458, Short.MAX_VALUE)
+        );
+        panelHistorialLayout.setVerticalGroup(
+            panelHistorialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 198, Short.MAX_VALUE)
+        );
+
+        scrollHistorial.setViewportView(panelHistorial);
+
         labelID.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         labelID.setForeground(new java.awt.Color(0, 0, 0));
         labelID.setText("ID Jugador: ");
@@ -88,7 +104,7 @@ public class PanelMenuJugador extends javax.swing.JPanel {
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelHIstorial, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scrollHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(botonMenu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -127,7 +143,7 @@ public class PanelMenuJugador extends javax.swing.JPanel {
                 .addGap(140, 140, 140)
                 .addComponent(labelHIstorial, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrollHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -136,12 +152,13 @@ public class PanelMenuJugador extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonMenu;
     private javax.swing.JButton botonPartida;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelHIstorial;
     private javax.swing.JLabel labelID;
     private javax.swing.JLabel labelIconoPlayer;
     private javax.swing.JLabel labelNombre;
     private javax.swing.JLabel labelSucursal;
+    private javax.swing.JPanel panelHistorial;
+    private javax.swing.JScrollPane scrollHistorial;
     // End of variables declaration//GEN-END:variables
 
     

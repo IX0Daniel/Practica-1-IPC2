@@ -17,7 +17,10 @@ public class PanelBaseJugador extends javax.swing.JPanel implements PanelVisual{
     private Usuario usuario;
     private PanelMenuJugador panelMenu;
     private PanelPartida panelPartidaJUgador;
-
+    private PanelResultados panelResultados;
+    
+    private ControlPartida controlPartida;
+    
     public PanelBaseJugador(Usuario usuario) {
         this.usuario = usuario;
         
@@ -51,23 +54,39 @@ public class PanelBaseJugador extends javax.swing.JPanel implements PanelVisual{
 
     }
     
-
+    public void cambiarPanelResultados(){
+        panelResultados = new PanelResultados(controlPartida.getDatosPartida());
+        add(panelResultados, "resultados");
+        layout.show(this, "resultados");
+        remove(panelPartidaJUgador);
+        
+        panelPartidaJUgador = null;
+        controlPartida = null;
+    }
     
     public void cambiarPanelPartida(){
         panelPartidaJUgador = new PanelPartida(usuario);
-        new ControlPartida(panelPartidaJUgador, usuario);
+        controlPartida = new ControlPartida(panelPartidaJUgador, usuario, () -> this.cambiarPanelResultados());
         add(panelPartidaJUgador, "partida");
         layout.show(this, "partida");
         
     }
+
     public void cambiarPanelMenu(){ 
         layout.show(this, "menu");
-        remove(panelPartidaJUgador);        
-        panelPartidaJUgador = null;
+        remove(panelResultados);
+
+        
+        panelResultados = null;
     }
+    
+    
+    
+    
+    
 
     
-    public void agregarEventoregresarMenu(ActionListener evento) {
+    public void agregarEventoRergresarMenu(ActionListener evento) {
         panelMenu.eventoRegresarMenu(evento);
     }
    
