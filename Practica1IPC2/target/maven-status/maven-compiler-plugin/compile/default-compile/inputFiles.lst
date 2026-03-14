@@ -38,6 +38,7 @@
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Sistema/Controlador.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Sistema/CrearPedido.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Sistema/DatosPartida.java
+/home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Sistema/PanelUsuariosExistentes.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Sistema/Pedido.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Sistema/Temporizador.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Usuarios/Ingrediente.java
@@ -45,3 +46,4 @@
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Usuarios/Rol.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Usuarios/Sucursal.java
 /home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Usuarios/Usuario.java
+/home/dz/NetBeansProjects/Practica1IPC2/src/main/java/Usuarios/UsuarioSuperAdmin.java

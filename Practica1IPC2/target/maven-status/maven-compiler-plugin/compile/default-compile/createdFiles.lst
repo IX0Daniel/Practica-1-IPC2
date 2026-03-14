@@ -1,6 +1,7 @@
 Partida/InformacionPedido.class
 Partida/PanelMenuJugador.class
 Main/PanelInicioSesión.class
+Sistema/ControlPartida$1.class
 Paneles/PanelPartida.class
 PanelPartida/PanelProductos.class
 Partida/PanelBaseJugador.class
@@ -23,6 +24,7 @@ Sistema/Pedido.class
 BaseDatos/InventarioDB.class
 BaseDatos/PedidoDB.class
 BaseDatos/SucursalesDB.class
+Usuarios/UsuarioSuperAdmin.class
 Main/PanelVisual.class
 BaseDatos/CrearUsuario.class
 Sistema/CrearPedido.class
@@ -39,9 +41,11 @@ Listas/Excepciones.class
 Usuarios/Usuario.class
 Sistema/ControlGeneral.class
 BaseDatos/ConexionDB.class
+Sistema/PanelUsuariosExistentes.class
 Partida/SubPanelIngredientes.class
 Sistema/ControlPedidos.class
 Listas/NodoLista.class
 Sistema/ControlUsuarioJugador.class
 Sistema/Controlador.class
+Paneles/PanelSuperAdmin$1.class
 Main/ContieneTemporizador.class

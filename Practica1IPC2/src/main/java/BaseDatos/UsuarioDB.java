@@ -1,7 +1,9 @@
 package BaseDatos;
 
+import Listas.ListaObjetos;
 import Usuarios.ObjetoBaseDato;
 import Usuarios.Usuario;
+import Usuarios.UsuarioSuperAdmin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -69,6 +71,27 @@ public class UsuarioDB {
         return null;
     }
     
+    public void subirNivel(int idUsuario) {
+
+        String sql = """
+            UPDATE jugador
+            SET nivel = nivel + 1
+            WHERE id_usuario = ?
+        """;
+
+        try (Connection conn = ConexionDB.getConexion();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idUsuario);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
     public int obtenerNivelJugador(int idUsuario) {
 
         String sql = "SELECT nivel FROM jugador WHERE id_usuario = ?";
@@ -90,5 +113,51 @@ public class UsuarioDB {
 
         return 0;
     }
+    
+    
+    public ListaObjetos<UsuarioSuperAdmin> listarUsuarios() {
+
+        ListaObjetos<UsuarioSuperAdmin> lista = new ListaObjetos<>();
+
+        String sql = """
+                     
+            SELECT
+            u.id_usuario,
+            u.nombre,
+            u.correo,
+            u.password,
+            r.nombre AS rol,
+            s.nombre AS sucursal
+            FROM usuario u
+            JOIN rol r ON u.id_rol = r.id_rol
+            LEFT JOIN sucursal s ON u.id_sucursal = s.id_sucursal;
+         
+        """;
+
+        try (Connection conn = ConexionDB.getConexion();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+
+                UsuarioSuperAdmin user = new UsuarioSuperAdmin(      
+                    rs.getInt("id_usuario"),
+                    rs.getString("nombre"),
+                    rs.getString("correo"),
+                    rs.getString("password"),
+                    rs.getString("rol"),
+                    rs.getString("sucursal")
+                );
+
+                lista.agregarElemento(user);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
 
 }

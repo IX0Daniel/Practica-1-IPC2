@@ -10,6 +10,7 @@ import Partida.InformacionPedido;
 import Usuarios.Ingrediente;
 import Usuarios.Usuario;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
@@ -23,6 +24,7 @@ public class ControlPedidos{
     private PanelPedidoAceptado panelPedidos;
     private Pedido pedido;
     private Usuario player;
+    private Runnable actualizarPuntos;
     
     public ControlPedidos(PanelPedidoAceptado panelPedidos, Pedido pedido, Usuario player) {
         this.panelPedidos = panelPedidos;
@@ -94,7 +96,7 @@ public class ControlPedidos{
     private void timerHorneando(){
     
         hornoEncendido = true;
-        tiempoFinal = 10 + (new UsuarioDB().obtenerNivelJugador(player.getId())* 5);
+        tiempoFinal = (new UsuarioDB().obtenerNivelJugador(player.getId())* 5);
         panelPedidos.configurarBarraDeProgreso(tiempoFinal);
         panelPedidos.activarHorno(false);
                 
@@ -112,7 +114,7 @@ public class ControlPedidos{
         
        
         
-        timer = new Timer(1000, e -> {
+        timer = new Timer(1000, (ActionEvent e) -> {
 
             tiempoTranscurrido ++;
 
@@ -142,9 +144,10 @@ public class ControlPedidos{
             
             if(tiempoTranscurrido >= tiempoLimite){
 
-                if(hornoEncendido){
+                /*if(hornoEncendido){
                     hornoEncendido = false;
-                }
+                }*/
+                
                 panelPedidos.pedidoNoEntregado();
                 detenerTimer();
             }

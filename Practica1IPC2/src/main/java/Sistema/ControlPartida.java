@@ -32,15 +32,20 @@ public class ControlPartida implements Controlador{
     
     private Controlador controlPedidos;
     
-    public ControlPartida(PanelPartida panelPartida, Usuario player, Runnable terminarTurno){
+    
+    public ControlPartida(PanelPartida panelPartida, Usuario player, Runnable terminarTurno, DatosPartida datosPartida){
+        
         this.player = player;
         this.terminarTurno = terminarTurno;
         this.panelPartida = panelPartida;
+        
+       
+        
         creadorPedido = new CrearPedido();
         
         //controlPedidos = new ControlPedidos(panelPartida.getPanelPedidos());        
         
-        datosPartida = new DatosPartida(player);
+        this.datosPartida = datosPartida;
         
 
         tiempoTurno();
@@ -61,6 +66,12 @@ public class ControlPartida implements Controlador{
     }
     
     
+    //ACTUALIZAR PUNTOS
+    private void actualizarPuntos(){
+    
+    
+    }
+    
     
     /*
         METODO PARA PEDIDOS ACEPTADOS
@@ -69,6 +80,7 @@ public class ControlPartida implements Controlador{
         "ENTREGAR" SE LE INFORME AL "panelPartida" QUE ELIMINE EL PANEL jajalasfdlkadakjl
     */
     
+    private Runnable evento;
     private void iniciarPedido(Pedido pedido){
         
         //SE AGREGA UN PANEL AL TABPANE CUANDO SE ACEPTA EL PEDIDO
@@ -78,12 +90,21 @@ public class ControlPartida implements Controlador{
         
         pedido.setIdPedido(idPedido);
         
-        PanelPedidoAceptado panelAceptado = panelPartida.agregarPanelJugable(pedido);
-        ControlPedidos controlPanelAceptado = new ControlPedidos(panelAceptado, pedido, player);
+        PanelPedidoAceptado pedidoAceptado = panelPartida.agregarPanelJugable(pedido);
+        
+        evento = new Runnable() {
+            @Override
+            public void run() {
+                panelPartida.actualizarPuntos(pedido);
+            }
+        };
+        
+        ControlPedidos controlPanelAceptado = new ControlPedidos(pedidoAceptado, pedido, player);
         
         
         new InventarioDB().actualizarInventario(player.getSucursal().getId(), pedido.getIngredientes());
-        panelAceptado.setEventoEntrega(e -> eliminarPanelPedidoAceptado(panelAceptado, controlPanelAceptado, pedido));
+        pedidoAceptado.setEventoEntrega((ActionEvent e) -> eliminarPanelPedidoAceptado(pedidoAceptado, controlPanelAceptado, pedido));
+        pedidoAceptado.setEventoCancelar((ActionEvent e) -> eliminarPanelPedidoAceptado(pedidoAceptado, controlPanelAceptado, pedido));
         
         datosPartida.getPedidos().agregarElemento(pedido);
         
@@ -109,6 +130,8 @@ public class ControlPartida implements Controlador{
         new PedidoDB().actualizarEstadoPedido(pedido.getIdPedido(), pedido.getEstado());
         panelPartida.eliminarPanelPedidoAceptado(panelAceptado);
         controlPanelAceptado.detenerTimer();
+        evento.run();
+        
     }
     
     
@@ -161,7 +184,7 @@ public class ControlPartida implements Controlador{
     
     private void crearTiempoEntrePedidos(){
         int nivel = new UsuarioDB().obtenerNivelJugador(player.getId());
-        tiempoCreacionPedidos = 30 - ((nivel-1)*5);
+        tiempoCreacionPedidos = 18 - ((nivel-1)*6);
         
     
     

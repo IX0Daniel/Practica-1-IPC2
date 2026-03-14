@@ -12,7 +12,10 @@ import java.sql.Statement;
  */
 public class CrearUsuario {
     
-    public void crearJugador(String nombre, String correo, String password, int idSucursal) {
+    
+    //TRUE: Si se pudo registrar
+    //FALSE: No se pudo regidtrar
+    public boolean crearJugador(String nombre, String correo, String password, int idSucursal) {
 
         String sqlUsuario = """
             INSERT INTO usuario (nombre, correo, password, id_rol, id_sucursal)
@@ -37,10 +40,19 @@ public class CrearUsuario {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+           
+            if (e.getMessage().contains("Duplicate")) {
+                System.out.println("Correo ya utilizado");
+                
+                return false;
+            } else {
+                e.printStackTrace();
+            }
+            
         }
 
-
+        
+        return true;
 
     }
     private void insertarJugador(int idUsuario) {

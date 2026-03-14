@@ -136,11 +136,7 @@ public class PanelInicioSesión extends javax.swing.JPanel {
         botonAcceder.addActionListener(eventoBoton);
         
     }
-    public void errorInicioSesion(){
-        JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
-     
-    }
-         
+    
     
     
     public void limpiarCampos() {
@@ -149,7 +145,12 @@ public class PanelInicioSesión extends javax.swing.JPanel {
     }
     
     
-    
+    public void errorInicioSesion() {
+       
+            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+  
+    }
+
     //GETTERS
     
     public String[] getUsuario(){
@@ -157,5 +158,6 @@ public class PanelInicioSesión extends javax.swing.JPanel {
         return usuario;
     }
 
+    
 
 }

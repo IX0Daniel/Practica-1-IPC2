@@ -309,6 +309,11 @@ public class PanelPedidoAceptado extends javax.swing.JPanel {
     public void setEventoEntrega(ActionListener eventoEntrega) {
         this.eventoEntrega = eventoEntrega;
     }
+    
+    public void setEventoCancelar(ActionListener eventoCAncelar){
+        botonCancelar.addActionListener(eventoCAncelar);
+        pedido.setEstado("CANCELADO");
+    }
 
     public Pedido getPedido() {
         return pedido;

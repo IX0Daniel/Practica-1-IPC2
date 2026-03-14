@@ -7,6 +7,7 @@ import Listas.ListaObjetos;
 import Paneles.PanelSuperAdmin;
 import Usuarios.ObjetoBaseDato;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,8 +46,26 @@ public class ControlSuperAdmin {
     
     private void guardarJugador() {
         String nombre = panelSuperAdmin.getNombre();
+        
+        if(nombre.equals("") || nombre == null){
+            panelSuperAdmin.correoInvalido( "Nombre inválido");
+            return;
+        }
+        
         String correo = panelSuperAdmin.getCorreo();
+        
+        if(correo.equals("") || correo == null){
+            panelSuperAdmin.correoInvalido( "Correo inválido");
+            return;
+        }
+        
         String password = panelSuperAdmin.getContraseña();
+        
+        if(password.equals("") || password == null){
+            panelSuperAdmin.correoInvalido( "Contraseña inválido");
+            return;
+        }
+        
         ObjetoBaseDato sucursal = (ObjetoBaseDato) panelSuperAdmin.getComboSucursal().getSelectedItem();
 
         
@@ -56,10 +75,15 @@ public class ControlSuperAdmin {
             return;
         }
             
+        boolean jugadorCreado = new CrearUsuario().crearJugador(nombre, correo, password, sucursal.getId());
         
+        if(jugadorCreado==false){
+            panelSuperAdmin.correoInvalido( "Correo ya Registrado");
+        }
         
-        new CrearUsuario().crearJugador(nombre, correo, password, sucursal.getId());
     }
+    
+   
     
     
     public void agregarEventoRegresarMenu(ActionListener evento){

@@ -3,6 +3,7 @@ package Partida;
 import Main.PanelVisual;
 import Paneles.PanelPartida;
 import Sistema.ControlPartida;
+import Sistema.DatosPartida;
 import Usuarios.Usuario;
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
@@ -62,11 +63,16 @@ public class PanelBaseJugador extends javax.swing.JPanel implements PanelVisual{
         
         panelPartidaJUgador = null;
         controlPartida = null;
+        
+        panelResultados.eventoRegresarMenu(e -> cambiarPanelMenu());
     }
     
     public void cambiarPanelPartida(){
-        panelPartidaJUgador = new PanelPartida(usuario);
-        controlPartida = new ControlPartida(panelPartidaJUgador, usuario, () -> this.cambiarPanelResultados());
+        
+        DatosPartida datosPartida = new DatosPartida(usuario);
+        
+        panelPartidaJUgador = new PanelPartida(usuario, datosPartida);
+        controlPartida = new ControlPartida(panelPartidaJUgador, usuario, () -> this.cambiarPanelResultados(), datosPartida);
         add(panelPartidaJUgador, "partida");
         layout.show(this, "partida");
         

@@ -22,7 +22,7 @@ public class InventarioDB {
 
         try (Connection conn = ConexionDB.getConexion()) {
 
-            conn.setAutoCommit(false); // iniciar transacción
+            conn.setAutoCommit(false);
 
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
 

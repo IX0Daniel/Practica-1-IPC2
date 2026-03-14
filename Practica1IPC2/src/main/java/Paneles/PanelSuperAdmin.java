@@ -2,13 +2,20 @@ package Paneles;
 
 
 
+import BaseDatos.UsuarioDB;
+import Listas.ListaObjetos;
 import Main.PanelVisual;
+import Sistema.PanelUsuariosExistentes;
 import Usuarios.ObjetoBaseDato;
 import Usuarios.Usuario;
+import Usuarios.UsuarioSuperAdmin;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,6 +37,13 @@ public class PanelSuperAdmin extends javax.swing.JPanel implements PanelVisual{
         botonMenu.setIcon(imagen);
         
         this.usuario = usuario;
+        agregarUsuarios();
+        
+        
+        nombreSUperAdmin.setText(usuario.getNombre());
+        
+        
+        botonRegistrar.addActionListener(eventoUsuarios);
     }
 
    
@@ -50,10 +64,16 @@ public class PanelSuperAdmin extends javax.swing.JPanel implements PanelVisual{
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         botonMenu = new javax.swing.JButton();
+        scrollUsuarios = new javax.swing.JScrollPane();
+        contenedorUsuarios = new javax.swing.JPanel();
+        nombreSUperAdmin = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(153, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(613, 228));
+        jPanel1.setMinimumSize(new java.awt.Dimension(613, 228));
 
         campoContraseña.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -161,6 +181,25 @@ public class PanelSuperAdmin extends javax.swing.JPanel implements PanelVisual{
         botonMenu.setBorder(null);
         botonMenu.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
+        scrollUsuarios.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollUsuarios.setMaximumSize(new java.awt.Dimension(719, 243));
+        scrollUsuarios.setMinimumSize(new java.awt.Dimension(719, 243));
+
+        contenedorUsuarios.setBackground(new java.awt.Color(204, 255, 255));
+        contenedorUsuarios.setMaximumSize(new java.awt.Dimension(717, 241));
+        contenedorUsuarios.setMinimumSize(new java.awt.Dimension(717, 241));
+        contenedorUsuarios.setLayout(new javax.swing.BoxLayout(contenedorUsuarios, javax.swing.BoxLayout.Y_AXIS));
+        scrollUsuarios.setViewportView(contenedorUsuarios);
+
+        nombreSUperAdmin.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        nombreSUperAdmin.setForeground(new java.awt.Color(0, 0, 0));
+        nombreSUperAdmin.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        nombreSUperAdmin.setText("Usuarios:");
+
+        jLabel7.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Usuarios:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -168,18 +207,34 @@ public class PanelSuperAdmin extends javax.swing.JPanel implements PanelVisual{
             .addGroup(layout.createSequentialGroup()
                 .addGap(83, 83, 83)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(botonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nombreSUperAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(scrollUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)))
                 .addContainerGap(148, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(botonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(botonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nombreSUperAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(362, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -192,15 +247,70 @@ public class PanelSuperAdmin extends javax.swing.JPanel implements PanelVisual{
     private javax.swing.JTextField campoCorreo;
     private javax.swing.JTextField campoNOmbre;
     private javax.swing.JComboBox<Usuarios.ObjetoBaseDato> comboSucursal;
+    private javax.swing.JPanel contenedorUsuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel nombreSUperAdmin;
+    private javax.swing.JScrollPane scrollUsuarios;
     // End of variables declaration//GEN-END:variables
 
 
+    
+    public void agregarEventoBotonRegistrar(ActionListener evento){
+        botonRegistrar.addActionListener(evento);
+                
+    
+    }
+    
+    
+    
+    private ActionListener eventoUsuarios = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            
+            contenedorUsuarios.removeAll();
+            agregarUsuarios();
+            
+        }
+    };
+
+    public void correoInvalido(String mensajeError){
+        
+        JOptionPane.showMessageDialog(null, mensajeError); 
+    }
+         
+    
+    public void agregarEventoRegresarMenu(ActionListener evento){
+        botonMenu.addActionListener(evento);                    
+    }
+    
+    private void agregarUsuarios(){
+        ListaObjetos<UsuarioSuperAdmin> usuariosExistentes = new UsuarioDB().listarUsuarios();
+        
+        
+        for(int i = 0; i < usuariosExistentes.getTamaño(); i++){
+            add(Box.createVerticalStrut(10));
+            UsuarioSuperAdmin usuario = (UsuarioSuperAdmin) usuariosExistentes.seleccionarNodo(i).getObjeto();
+            
+            
+            PanelUsuariosExistentes panelUsuario = new PanelUsuariosExistentes(usuario);
+            contenedorUsuarios.add(panelUsuario);
+        }
+        
+        
+        
+        revalidate();
+        repaint();
+    }
+    
+    
+    
+    
 
     //GETTERS
     
@@ -225,14 +335,4 @@ public class PanelSuperAdmin extends javax.swing.JPanel implements PanelVisual{
         return comboSucursal;
     }
     
-    public void agregarEventoBotonRegistrar(ActionListener evento){
-        botonRegistrar.addActionListener(evento);
-                
-    
-    }
-
-    
-    public void agregarEventoRegresarMenu(ActionListener evento){
-        botonMenu.addActionListener(evento);                    
-    }
 }

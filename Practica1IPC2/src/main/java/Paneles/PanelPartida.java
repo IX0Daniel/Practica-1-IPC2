@@ -4,10 +4,12 @@ import PanelPartida.PanelPedidos;
 import BaseDatos.IngredienteBD;
 import BaseDatos.UsuarioDB;
 import Partida.PanelPedidoAceptado;
+import Sistema.DatosPartida;
 import Sistema.Pedido;
 import Usuarios.ObjetoBaseDato;
 import Usuarios.Usuario;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,17 +20,18 @@ public class PanelPartida extends javax.swing.JPanel {
     private Usuario player;
     
     private PanelPedidos panelPedidos;
-              
+        
+    private DatosPartida datosPartida;
     
     
     /**
      * Creates new form SubPanelPartida
      * @param player
      */
-    public PanelPartida(Usuario player) {
+    public PanelPartida(Usuario player, DatosPartida datosPartida) {
         
        
-        
+        this.datosPartida = datosPartida;
         this.player = player;
                 
         
@@ -50,7 +53,7 @@ public class PanelPartida extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         labelNombre = new javax.swing.JLabel();
         labelNivel = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        labelPuntos = new javax.swing.JLabel();
         labelTiempo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 255, 204));
@@ -61,7 +64,6 @@ public class PanelPartida extends javax.swing.JPanel {
         contenedorPedidos.setPreferredSize(new java.awt.Dimension(220, 610));
 
         contenedorPedidosAceptados.setBackground(new java.awt.Color(51, 255, 153));
-        contenedorPedidosAceptados.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         contenedorPedidosAceptados.setForeground(new java.awt.Color(0, 0, 0));
         contenedorPedidosAceptados.setFont(new java.awt.Font("CaskaydiaCove NFM SemiBold", 1, 16)); // NOI18N
 
@@ -80,11 +82,11 @@ public class PanelPartida extends javax.swing.JPanel {
         labelNivel.setForeground(new java.awt.Color(0, 0, 0));
         labelNivel.setText("Nivel; 0");
 
-        jLabel5.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("SCORE: 00000");
+        labelPuntos.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        labelPuntos.setForeground(new java.awt.Color(0, 0, 0));
+        labelPuntos.setText("SCORE: 00000");
 
-        labelTiempo.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        labelTiempo.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         labelTiempo.setForeground(new java.awt.Color(0, 0, 0));
         labelTiempo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelTiempo.setText("Tiempo Restante");
@@ -110,17 +112,18 @@ public class PanelPartida extends javax.swing.JPanel {
                                     .addComponent(labelNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(contenedorPedidosAceptados, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(labelTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(16, 16, 16)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(contenedorPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -134,12 +137,12 @@ public class PanelPartida extends javax.swing.JPanel {
                                 .addComponent(labelNivel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(contenedorPedidosAceptados, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(contenedorPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -149,9 +152,9 @@ public class PanelPartida extends javax.swing.JPanel {
     private javax.swing.JTabbedPane contenedorPedidosAceptados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel labelNivel;
     private javax.swing.JLabel labelNombre;
+    private javax.swing.JLabel labelPuntos;
     private javax.swing.JLabel labelTiempo;
     // End of variables declaration//GEN-END:variables
 
@@ -182,8 +185,51 @@ public class PanelPartida extends javax.swing.JPanel {
     
     public void mostrarTiempo(int tiempo){
         labelTiempo.setText("Tiempo Restante: " + Integer.toString(tiempo));
+    }
+    
+    public void actualizarPuntos(Pedido pedido){
+        
+        int puntosActuales = datosPartida.getPuntos();
+                
+        switch (pedido.getEstado()) {
+            case "ENTREGADO":
+                
+                datosPartida.setPuntos(puntosActuales += 100);
+                labelPuntos.setText("SCORE: "+Integer.toString(datosPartida.getPuntos()));
+                int pedidosCompletados = datosPartida.getPedidosCompletados() + 1;
+                datosPartida.setPedidosCompletados(pedidosCompletados);
+                
+                break;
+
+            case "CANCELADO":
+                
+                datosPartida.setPuntos(puntosActuales += -30);
+                labelPuntos.setText("SCORE: "+Integer.toString(datosPartida.getPuntos()));
+                
+                break;
+                
+                
+            default:
+                
+                datosPartida.setPuntos(puntosActuales += -50);
+                labelPuntos.setText("SCORE: "+Integer.toString(datosPartida.getPuntos()));
+                
+                break;    
+        }
         
         
+        if(puntosActuales >= 400){
+            UsuarioDB nivelJUgador = new UsuarioDB();
+            nivelJUgador.subirNivel(player.getId());
+            int nivel = nivelJUgador.obtenerNivelJugador(player.getId());
+            labelNivel.setText("Nivel: " + Integer.toString(nivel));
+                    
+            
+            JOptionPane.showMessageDialog(null, "Has subido de Nivel: " + nivel); 
+        
+        }
+                
+       
     }
 
     public void eliminarPanelPedidoAceptado(PanelPedidoAceptado panelPedidoAceptado) {

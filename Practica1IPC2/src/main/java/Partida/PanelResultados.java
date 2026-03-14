@@ -5,7 +5,9 @@
 package Partida;
 
 import Sistema.DatosPartida;
+import java.awt.Image;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -15,7 +17,7 @@ public class PanelResultados extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelResultados
-     */
+    */
     private DatosPartida datosPartida;
     
     public PanelResultados(DatosPartida datosPartida) {
@@ -116,7 +118,7 @@ public class PanelResultados extends javax.swing.JPanel {
         botonMenu.setBackground(new java.awt.Color(102, 255, 102));
         botonMenu.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         botonMenu.setForeground(new java.awt.Color(0, 0, 0));
-        botonMenu.setText("Menú ");
+        botonMenu.setText("Menú");
         botonMenu.setBorder(null);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -248,7 +250,16 @@ public class PanelResultados extends javax.swing.JPanel {
         etiquetsTiempo.setText(Integer.toString(datosPartida.getTiempo()));
         etiquetaPedidos.setText(Integer.toString(datosPartida.getPedidosCompletados()));
         
-    
+        ImageIcon imagen = new ImageIcon(getClass().getResource("/imagen/return.png"));
+        imagen = new ImageIcon(imagen.getImage().getScaledInstance((44), (44), Image.SCALE_SMOOTH));
+        botonMenu.setIcon(imagen);
+        
+        
+        imagen = new ImageIcon(getClass().getResource("/imagen/pizza 1.png"));
+        imagen = new ImageIcon(imagen.getImage().getScaledInstance((184), (184), Image.SCALE_SMOOTH));
+        botonMenu.setIcon(imagen);
+        
+        
     }
 
 }
